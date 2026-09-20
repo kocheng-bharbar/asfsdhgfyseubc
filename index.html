@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Internal & Data Management - PT Nusantara Utama</title>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        // Custom Tailwind theme to match user requirements (Forest Green, Black, White)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            50: '#f2f9f5',
+                            100: '#e1f2e8',
+                            200: '#c3e5d2',
+                            300: '#96d1b2',
+                            400: '#63b58c',
+                            500: '#3f976c',
+                            600: '#2d7853',
+                            700: '#256044',
+                            800: '#1e4d38',
+                            900: '#19402f',
+                            950: '#0c2319', // Deep Forest Green
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8faf9;
+        }
+        /* Custom scrollbar for clean internal panels */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #256044;
+        }
+    </style>
+</head>
+<body class="text-slate-900 bg-[#f4f7f5] antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 bg-forest-950 text-emerald-400 rounded-2xl flex items-center justify-center font-bold text-xl shadow-md shadow-forest-950/20">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-forest-950">ROBI <span class="text-forest-600">Rombongan Babi</span></span>
+                        <p class="text-xs text-slate-500 font-medium">PT Sela Maju Mundur</p>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" 
+                        alt="User Avatar" class="w-10 h-10 rounded-2xl object-cover ring-2 ring-forest-600/30">
+                    <div class="hidden lg:block text-left">
+                        <h4 class="text-xs font-bold text-slate-900 leading-tight">Sarah Amelia</h4>
+                        <p class="text-[11px] text-forest-700 font-semibold">HR & Admin Manager</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Header Banner -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="relative bg-gradient-to-r from-forest-950 via-forest-900 to-slate-900 rounded-3xl p-6 sm:p-10 text-white overflow-hidden shadow-2xl shadow-forest-950/20">
+            <!-- Decorative Background SVG -->
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                <i data-lucide="building-2" class="w-96 h-96 text-white"></i>
+            </div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-4 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistem Operasional Terintegrasi
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 leading-tight">
+                    Selamat Datang di Portal Internal, <span class="text-emerald-400">Sarah</span> 👋
+                </h1>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                    Akses terpusat untuk memantau data karyawan, status armada kendaraan operasional, laporan internal, serta pengumuman penting perusahaan secara realtime.
+                </p>
+
+                <!-- Quick Action Buttons -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="scrollToSection('section-karyawan')" class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold text-sm transition shadow-lg shadow-emerald-500/20">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Cek Absensi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Statistics Grid -->
+    <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            
+            <!-- Card 1 -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider uppercase">Total Karyawan</span>
+                    <div class="w-10 h-10 rounded-2xl bg-forest-50 text-forest-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <h3 class="text-3xl font-extrabold text-slate-900">248</h3>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                        <i data-lucide="trending-up" class="w-3 h-3"></i> +12 bln ini
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">235 Hadir • 8 Cuti • 5 Izin</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider uppercase">Armada Operasional</span>
+                    <div class="w-10 h-10 rounded-2xl bg-forest-50 text-forest-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="truck" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <h3 class="text-3xl font-extrabold text-slate-900">45 <span class="text-base font-normal text-slate-400">/ 48</span></h3>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                        93.7% Ready
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">32 Dalam Perjalanan • 3 Service</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider uppercase">Pengumuman Aktif</span>
+                    <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="megaphone" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <h3 class="text-3xl font-extrabold text-slate-900">5</h3>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800">
+                        2 Wajib dibaca
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">Update regulasi K3 & Kebijakan Cuti</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition group">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 tracking-wider uppercase">Performa Efisiensi</span>
+                    <div class="w-10 h-10 rounded-2xl bg-forest-950 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="activity" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div class="flex items-baseline justify-between">
+                    <h3 class="text-3xl font-extrabold text-slate-900">98.2%</h3>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                        Target Optimal
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">BBM & Maintenance Terkendali</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Main Content Container - Vertical Scrolling Sections -->
+    <main class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-grow mb-16 space-y-16">
+        
+        <!-- SECTION 1: DATA KARYAWAN -->
+        <section id="section-karyawan" class="scroll-mt-24">
+            <!-- Section Title & Filter Bar -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-forest-950 text-emerald-400 rounded-2xl flex items-center justify-center font-bold">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-900">Data Karyawan Perusahaan</h2>
+                        <p class="text-xs text-slate-500 font-medium">Daftar anggota tim, divisi, dan status kehadiran realtime</p>
+                    </div>
+                </div>
+                
+                <button onclick="openModal('addModal')" class="px-4 py-2.5 bg-forest-700 hover:bg-forest-800 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center gap-2 transition w-fit">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>Tambah Karyawan</span>
+                </button>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">Filter Divisi:</span>
+                    <select id="deptFilter" onchange="filterEmployees()" class="bg-slate-100 text-slate-800 text-sm font-semibold rounded-xl px-3 py-2 border-none outline-none focus:ring-2 focus:ring-forest-600 w-full md:w-auto">
+                        <option value="all">Semua Divisi (248)</option>
+                        <option value="Operasional">Operasional & Logistik</option>
+                        <option value="HR & Admin">HR & General Affair</option>
+                        <option value="IT & Tech">IT & System</option>
+                        <option value="Keuangan">Finance & Payroll</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2 w-full md:w-auto">
+                    <div class="relative w-full md:w-64">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                        <input type="text" id="employeeSearch" onkeyup="filterEmployees()" placeholder="Cari nama / NIK..." 
+                            class="w-full pl-9 pr-3 py-1.5 bg-slate-100 text-sm rounded-xl border-none outline-none focus:ring-2 focus:ring-forest-600">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Cards Grid -->
+            <div id="employeeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Employee Card 1 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="Operasional" data-name="Budi Santoso">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Budi Santoso</h3>
+                                <p class="text-xs text-forest-700 font-medium">Head of Logistics</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88421</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">Operasional</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">budi.s@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 812-3456-7890</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">Shift Pagi (08:00 - 17:00)</span>
+                        <button onclick="viewEmployeeDetail('Budi Santoso', 'Head of Logistics', 'Operasional', 'NIK-88421', 'budi.s@nusantara.co.id', '+62 812-3456-7890', 'Aktif', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 2 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="IT & Tech" data-name="Rian Pratama">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Rian Pratama</h3>
+                                <p class="text-xs text-forest-700 font-medium">Senior System Engineer</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88422</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">IT & Tech</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">rian.p@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 813-9876-5432</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">WFA / Remote</span>
+                        <button onclick="viewEmployeeDetail('Rian Pratama', 'Senior System Engineer', 'IT & Tech', 'NIK-88422', 'rian.p@nusantara.co.id', '+62 813-9876-5432', 'Aktif', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 3 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="Keuangan" data-name="Dewi Lestari">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Dewi Lestari</h3>
+                                <p class="text-xs text-forest-700 font-medium">Finance Specialist</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88425</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-amber-500 ring-4 ring-amber-100" title="Status: Cuti"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">Keuangan</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">dewi.l@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 811-2233-4455</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-xl">Cuti Tahunan (s.d 20 Sep)</span>
+                        <button onclick="viewEmployeeDetail('Dewi Lestari', 'Finance Specialist', 'Keuangan', 'NIK-88425', 'dewi.l@nusantara.co.id', '+62 811-2233-4455', 'Cuti', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 4 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="Operasional" data-name="Hendro Wijaya">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Hendro Wijaya</h3>
+                                <p class="text-xs text-forest-700 font-medium">Fleet Lead Driver</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88430</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">Operasional</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">hendro.w@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 857-1122-3344</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">On Task - Driver Tronton</span>
+                        <button onclick="viewEmployeeDetail('Hendro Wijaya', 'Fleet Lead Driver', 'Operasional', 'NIK-88430', 'hendro.w@nusantara.co.id', '+62 857-1122-3344', 'Aktif', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 5 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="HR & Admin" data-name="Siti Rahmawati">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Siti Rahmawati</h3>
+                                <p class="text-xs text-forest-700 font-medium">HR Generalist</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88432</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">HR & Admin</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">siti.r@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 812-7788-9900</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">Shift Pagi (08:00 - 17:00)</span>
+                        <button onclick="viewEmployeeDetail('Siti Rahmawati', 'HR Generalist', 'HR & Admin', 'NIK-88432', 'siti.r@nusantara.co.id', '+62 812-7788-9900', 'Aktif', 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 6 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="Operasional" data-name="Agus Setiawan">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Agus Setiawan</h3>
+                                <p class="text-xs text-forest-700 font-medium">Warehouse Manager</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88435</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">Operasional</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">agus.s@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 819-3344-5566</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">Shift Siang (13:00 - 21:00)</span>
+                        <button onclick="viewEmployeeDetail('Agus Setiawan', 'Warehouse Manager', 'Operasional', 'NIK-88435', 'agus.s@nusantara.co.id', '+62 819-3344-5566', 'Aktif', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 7 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="Keuangan" data-name="Nadia Putri">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Nadia Putri</h3>
+                                <p class="text-xs text-forest-700 font-medium">Payroll Supervisor</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88440</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">Keuangan</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">nadia.p@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 812-9900-1122</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">Shift Pagi (08:00 - 17:00)</span>
+                        <button onclick="viewEmployeeDetail('Nadia Putri', 'Payroll Supervisor', 'Keuangan', 'NIK-88440', 'nadia.p@nusantara.co.id', '+62 812-9900-1122', 'Aktif', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Employee Card 8 -->
+                <div class="employee-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group" data-dept="IT & Tech" data-name="Fajar Ramadhan">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="w-14 h-14 rounded-2xl object-cover ring-2 ring-forest-600/20">
+                            <div>
+                                <h3 class="font-bold text-slate-900 group-hover:text-forest-700 transition">Fajar Ramadhan</h3>
+                                <p class="text-xs text-forest-700 font-medium">UI/UX Specialist</p>
+                                <span class="inline-block mt-1 text-[10px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md">NIK: NIK-88442</span>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 ring-4 ring-emerald-100" title="Status: Hadir"></span>
+                    </div>
+                    <div class="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-600">
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> Divisi</span>
+                            <span class="font-semibold text-slate-800">IT & Tech</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i> Email</span>
+                            <span class="font-semibold text-slate-800">fajar.r@nusantara.co.id</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i> Telepon</span>
+                            <span class="font-semibold text-slate-800">+62 813-5566-7788</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-1">
+                        <span class="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-xl">WFA / Remote</span>
+                        <button onclick="viewEmployeeDetail('Fajar Ramadhan', 'UI/UX Specialist', 'IT & Tech', 'NIK-88442', 'fajar.r@nusantara.co.id', '+62 813-5566-7788', 'Aktif', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80')" class="text-xs font-bold text-forest-700 hover:text-forest-900 flex items-center gap-1">
+                            Detail <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: DATA ARMADA -->
+        <section id="section-armada" class="scroll-mt-24 pt-6 border-t border-slate-200">
+            <!-- Section Title -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-forest-950 text-emerald-400 rounded-2xl flex items-center justify-center font-bold">
+                        <i data-lucide="truck" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-900">Data Armada & Kendaraan Operasional</h2>
+                        <p class="text-xs text-slate-500 font-medium">Monitoring status unit, driver assigned, bahan bakar, dan lokasi rute</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Armada Overview Controls -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+                    <button onclick="filterFleet('all')" class="fleet-filter-btn active px-4 py-1.5 rounded-xl text-xs font-bold bg-forest-900 text-white">Semua Unit (48)</button>
+                    <button onclick="filterFleet('ready')" class="fleet-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Siap Jalan (32)</button>
+                    <button onclick="filterFleet('route')" class="fleet-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Beroperasi (13)</button>
+                    <button onclick="filterFleet('maintenance')" class="fleet-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Maintenance (3)</button>
+                </div>
+                <div class="relative w-full md:w-64">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                    <input type="text" id="fleetSearch" onkeyup="searchFleet()" placeholder="Cari Plat Nomor / Driver..." 
+                        class="w-full pl-9 pr-3 py-1.5 bg-slate-100 text-sm rounded-xl border-none outline-none focus:ring-2 focus:ring-forest-600">
+                </div>
+            </div>
+
+            <!-- Fleet Grid -->
+            <div id="fleetGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Vehicle Card 1 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="route" data-plate="B 9842 XKR">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-full flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> On the Road
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-001</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-forest-50 text-forest-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 9842 XKR</h3>
+                            <p class="text-xs text-slate-500 font-medium">Hino Ranger 500 Heavy Duty</p>
+                            <p class="text-[11px] text-forest-700 font-semibold mt-0.5">Rute: Jakarta - Semarang</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Kapasitas BBM:</span>
+                            <span class="font-bold text-slate-900">78% (Solar)</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 78%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Driver Assigned: <strong>Hendro W.</strong></span>
+                            <span>KM: 142,500</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> Estimasi Tiba: 18:30 WIB</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Lacak GPS &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 2 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="ready" data-plate="B 9102 UYN">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-extrabold rounded-full">
+                            Siap Jalan (Standby)
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-002</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-forest-50 text-forest-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 9102 UYN</h3>
+                            <p class="text-xs text-slate-500 font-medium">Mitsubishi Fuso Canter 125</p>
+                            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Parkir Pool A - Halim</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Kapasitas BBM:</span>
+                            <span class="font-bold text-slate-900">95% (Full)</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Driver: <strong>Bambang S.</strong></span>
+                            <span>KM: 88,200</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-emerald-700 font-semibold flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Service Terakhir: 2 Mgg Lalu</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Detail &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 3 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="maintenance" data-plate="B 9553 PQL">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-extrabold rounded-full">
+                            Dalam Perawatan / Service
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-003</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-amber-50 text-amber-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="wrench" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 9553 PQL</h3>
+                            <p class="text-xs text-slate-500 font-medium">Isuzu Giga Box 230PS</p>
+                            <p class="text-[11px] text-amber-700 font-semibold mt-0.5">Bengkel Resmi Isuzu Cikarang</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Progres Service:</span>
+                            <span class="font-bold text-amber-700">40% (Ganti Oli & Kampas)</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full rounded-full" style="width: 40%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Mekanik: <strong>Bengkel Mitra</strong></span>
+                            <span>Est Selesai: Besok</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-600"></i> Perawatan Berkala</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Laporan &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 4 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="ready" data-plate="B 1088 WZX">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-extrabold rounded-full">
+                            Siap Jalan (Operational Van)
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-004</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-forest-50 text-forest-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="car" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 1088 WZX</h3>
+                            <p class="text-xs text-slate-500 font-medium">Toyota Innova Zenix Hybrid</p>
+                            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Parkir Direksi HQ</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Kapasitas BBM / Baterai:</span>
+                            <span class="font-bold text-slate-900">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Driver: <strong>Ahmad Yani</strong></span>
+                            <span>KM: 24,100</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-emerald-700 font-semibold flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Kondisi Prima</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Detail &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 5 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="route" data-plate="B 8832 KLO">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-full flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> On the Road
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-005</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-forest-50 text-forest-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 8832 KLO</h3>
+                            <p class="text-xs text-slate-500 font-medium">Mercedes-Benz Axor 2528 R</p>
+                            <p class="text-[11px] text-forest-700 font-semibold mt-0.5">Rute: Bandung - Surabaya</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Kapasitas BBM:</span>
+                            <span class="font-bold text-slate-900">62% (Solar)</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 62%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Driver: <strong>Rudi Hermawan</strong></span>
+                            <span>KM: 112,000</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> Estimasi Tiba: Besok 06:00</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Lacak GPS &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 6 -->
+                <div class="fleet-card bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300" data-status="ready" data-plate="B 7710 SZA">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-extrabold rounded-full">
+                            Siap Jalan (Standby)
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-400">ID: FLT-006</span>
+                    </div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-14 h-14 bg-forest-50 text-forest-800 rounded-2xl flex items-center justify-center shrink-0">
+                            <i data-lucide="truck" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">B 7710 SZA</h3>
+                            <p class="text-xs text-slate-500 font-medium">Isuzu Elf Blind Van</p>
+                            <p class="text-[11px] text-slate-500 font-semibold mt-0.5">Parkir Hub Marunda</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-2xl space-y-2 mb-4 text-xs">
+                        <div class="flex justify-between font-medium text-slate-600">
+                            <span>Kapasitas BBM:</span>
+                            <span class="font-bold text-slate-900">90%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 90%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-slate-500 pt-1">
+                            <span>Driver: <strong>Deni Kurnia</strong></span>
+                            <span>KM: 45,800</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-xs text-emerald-700 font-semibold flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Siap Pengiriman Lokal</span>
+                        <button onclick="openModal('fleetModal')" class="text-xs font-bold text-forest-700 hover:text-forest-900">Detail &rarr;</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: INFORMASI INTERNAL & PENGUMUMAN -->
+        <section id="section-info" class="scroll-mt-24 pt-6 border-t border-slate-200">
+            <!-- Section Title -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-forest-950 text-emerald-400 rounded-2xl flex items-center justify-center font-bold">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-extrabold text-slate-900">Informasi & Pengumuman Internal</h2>
+                    <p class="text-xs text-slate-500 font-medium">Berita perusahaan, panduan operasional, serta unduhan dokumen resmi</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Main Announcements Column (2/3) -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Announcement 1 (Pinned) -->
+                    <div class="bg-gradient-to-br from-forest-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold rounded-full flex items-center gap-1.5">
+                                <i data-lucide="pin" class="w-3.5 h-3.5"></i> Pengumuman Penting Dirut
+                            </span>
+                            <span class="text-xs text-slate-400">16 September 2026</span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-3 text-white">
+                            Kebijakan Jam Kerja Fleksibel & Implementasi Green Energy Fleet 2026
+                        </h2>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Menindaklanjuti program keberlanjutan perusahaan, PT Nusantara Utama resmi meluncurkan penambahan 10 unit armada listrik serta pemberlakuan jam kerja hybrid bagi divisi support mulai bulan depan.
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs">
+                            <div class="flex items-center gap-2">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-7 h-7 rounded-full object-cover">
+                                <span class="text-slate-300 font-medium">Dikeluarkan oleh: <strong>Direksi & HR Manager</strong></span>
+                            </div>
+                            <button class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-forest-950 font-bold rounded-xl transition">
+                                Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Announcement 2 -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full">
+                                Jadwal Maintenance
+                            </span>
+                            <span class="text-xs text-slate-400">14 September 2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">
+                            Pemeliharaan Rutin Seluruh Fleet Truk Tronton Pool Cikarang
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Diberitahukan kepada seluruh driver operasional divisi logistik bahwa inspeksi rutin dan servis berkala akan dilaksanakan pada tanggal 22-24 September. Harap atur ulang jadwal pengiriman.
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+                            <span>Oleh: <strong>Tim Fleet Management</strong></span>
+                            <span class="flex items-center gap-1 text-forest-700 font-semibold cursor-pointer">4 Lampiran PDF <i data-lucide="download" class="w-3.5 h-3.5"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- Announcement 3 -->
+                    <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">
+                                HSE & Safety
+                            </span>
+                            <span class="text-xs text-slate-400">10 September 2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">
+                            Pelatihan Keselamatan Berkendara (Defensive Driving Course)
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Wajib diikuti oleh seluruh pengemudi armada utama. Sertifikasi ini berlaku sebagai syarat perpanjangan lisensi operasional internal.
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+                            <span>Oleh: <strong>Divisi K3 (HSE)</strong></span>
+                            <span class="text-forest-700 font-semibold cursor-pointer">Daftar Peserta &rarr;</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Content (1/3) -->
+                <div class="space-y-6">
+                    
+                    <!-- Quick Downloads / Documents -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm">
+                        <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="folder-down" class="w-5 h-5 text-forest-600"></i> Dokumen & Form Internal
+                        </h3>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-forest-50 text-xs transition group">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                                    <div>
+                                        <p class="font-bold text-slate-800">Form Pengajuan Cuti.pdf</p>
+                                        <p class="text-[10px] text-slate-400">Terakhir update: Jan 2026</p>
+                                    </div>
+                                </div>
+                                <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                            </a>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-forest-50 text-xs transition group">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                                    <div>
+                                        <p class="font-bold text-slate-800">SOP Klaim Reimburs BBM.pdf</p>
+                                        <p class="text-[10px] text-slate-400">Terakhir update: Feb 2026</p>
+                                    </div>
+                                </div>
+                                <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                            </a>
+                            <a href="#" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-forest-50 text-xs transition group">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                                    <div>
+                                        <p class="font-bold text-slate-800">Jadwal Shift Driver Q3.xlsx</p>
+                                        <p class="text-[10px] text-slate-400">Terakhir update: Ags 2026</p>
+                                    </div>
+                                </div>
+                                <i data-lucide="download" class="w-4 h-4 text-slate-400 group-hover:text-forest-700"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Internal Events Calendar Preview -->
+                    <div class="bg-forest-950 p-6 rounded-3xl text-white shadow-xl">
+                        <h3 class="font-bold mb-4 flex items-center gap-2">
+                            <i data-lucide="calendar" class="w-5 h-5 text-emerald-400"></i> Agenda Bulan Ini
+                        </h3>
+                        <div class="space-y-4 text-xs">
+                            <div class="flex gap-3">
+                                <div class="bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl p-2.5 text-center min-w-[50px]">
+                                    <span class="block text-lg font-bold leading-none">20</span>
+                                    <span class="text-[10px] uppercase">Sep</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Townhall Meeting All Staff</h4>
+                                    <p class="text-slate-400">Auditorium Lt. 3 / Zoom</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="bg-white/10 border border-white/10 text-white rounded-xl p-2.5 text-center min-w-[50px]">
+                                    <span class="block text-lg font-bold leading-none">25</span>
+                                    <span class="text-[10px] uppercase">Sep</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Audit Kelayakan Armada</h4>
+                                    <p class="text-slate-400">Pool Utama Halim</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Window: Detail Karyawan -->
+    <div id="employeeDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 transform transition-all">
+            <button onclick="closeModal('employeeDetailModal')" class="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="flex items-center gap-4 mb-6">
+                <img id="mAvatar" src="" class="w-16 h-16 rounded-2xl object-cover ring-4 ring-forest-600/20">
+                <div>
+                    <h3 id="mName" class="text-xl font-extrabold text-slate-900"></h3>
+                    <p id="mRole" class="text-sm font-semibold text-forest-700"></p>
+                    <span id="mStatus" class="inline-block mt-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full"></span>
+                </div>
+            </div>
+
+            <div class="space-y-3 bg-slate-50 p-4 rounded-2xl text-xs sm:text-sm mb-6">
+                <div class="flex justify-between border-b border-slate-200/60 pb-2">
+                    <span class="text-slate-500">NIK:</span>
+                    <span id="mNIK" class="font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between border-b border-slate-200/60 pb-2">
+                    <span class="text-slate-500">Divisi:</span>
+                    <span id="mDept" class="font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between border-b border-slate-200/60 pb-2">
+                    <span class="text-slate-500">Email Perusahaan:</span>
+                    <span id="mEmail" class="font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Telepon Darurat:</span>
+                    <span id="mPhone" class="font-bold text-slate-800"></span>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal('employeeDetailModal')" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs transition">Tutup</button>
+                <button onclick="triggerToast('Menghubungi Karyawan via Email...')" class="w-full py-3 bg-forest-900 hover:bg-forest-950 text-white font-bold rounded-2xl text-xs transition flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Kirim Pesan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Window: Generic Form Quick Action -->
+    <div id="quickActionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-slate-100">
+            <button onclick="closeModal('quickActionModal')" class="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 text-slate-400">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <h3 class="text-lg font-extrabold text-slate-900 mb-2">Pengajuan Quick Request</h3>
+            <p class="text-xs text-slate-500 mb-6">Pilih jenis pengajuan internal yang ingin Anda proses.</p>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Pengajuan</label>
+                    <select class="w-full bg-slate-100 text-sm font-semibold rounded-xl px-3 py-2.5 border-none outline-none focus:ring-2 focus:ring-forest-600">
+                        <option>Pengajuan Cuti / Izin Kerja</option>
+                        <option>Permohonan Kendaraan Operasional</option>
+                        <option>Laporan Perawatan Armada</option>
+                        <option>Klaim Reimbursment & Biaya</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Keterangan / Catatan</label>
+                    <textarea rows="3" placeholder="Tuliskan detail permohonan Anda..." class="w-full bg-slate-100 text-sm rounded-xl p-3 border-none outline-none focus:ring-2 focus:ring-forest-600"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-forest-700 hover:bg-forest-800 text-white font-bold rounded-2xl text-xs transition">
+                    Kirim Permohonan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast Element -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-forest-950 text-white px-5 py-3 rounded-2xl shadow-2xl border border-emerald-500/30 flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
+        <span id="toastMsg" class="text-xs font-semibold"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 px-4 sm:px-6 lg:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-forest-900 text-emerald-400 rounded-lg flex items-center justify-center font-bold text-xs">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                </div>
+                <span class="font-semibold text-slate-700">PT Nusantara Utama © 2026 Internal System</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-forest-700 transition">Panduan Pengguna</a>
+                <a href="#" class="hover:text-forest-700 transition">Kebijakan Privasi Data</a>
+                <a href="#" class="hover:text-forest-700 transition">IT Helpdesk</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Smooth Scroll to Section Helper
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Filter Employees by Department & Search Key
+        function filterEmployees() {
+            const dept = document.getElementById('deptFilter').value;
+            const searchKey = document.getElementById('employeeSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.employee-card');
+
+            cards.forEach(card => {
+                const cardDept = card.getAttribute('data-dept');
+                const cardName = card.getAttribute('data-name').toLowerCase();
+
+                const matchesDept = (dept === 'all' || cardDept === dept);
+                const matchesSearch = cardName.includes(searchKey);
+
+                if (matchesDept && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter Armada Vehicles by Status
+        function filterFleet(status) {
+            const cards = document.querySelectorAll('.fleet-card');
+            const btns = document.querySelectorAll('.fleet-filter-btn');
+
+            // Update active filter button styling
+            btns.forEach(btn => {
+                btn.classList.remove('bg-forest-900', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            event.target.classList.add('bg-forest-900', 'text-white');
+            event.target.classList.remove('bg-slate-100', 'text-slate-600');
+
+            cards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+                if (status === 'all' || cardStatus === status) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Fleet Search Filter
+        function searchFleet() {
+            const key = document.getElementById('fleetSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.fleet-card');
+
+            cards.forEach(card => {
+                const plate = card.getAttribute('data-plate').toLowerCase();
+                if (plate.includes(key)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // View Employee Detail Modal Handler
+        function viewEmployeeDetail(name, role, dept, nik, email, phone, status, avatar) {
+            document.getElementById('mName').innerText = name;
+            document.getElementById('mRole').innerText = role;
+            document.getElementById('mDept').innerText = dept;
+            document.getElementById('mNIK').innerText = nik;
+            document.getElementById('mEmail').innerText = email;
+            document.getElementById('mPhone').innerText = phone;
+            document.getElementById('mAvatar').src = avatar;
+
+            const statusEl = document.getElementById('mStatus');
+            statusEl.innerText = status;
+            if (status === 'Aktif') {
+                statusEl.className = "inline-block mt-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+            } else {
+                statusEl.className = "inline-block mt-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800";
+            }
+
+            document.getElementById('employeeDetailModal').classList.remove('hidden');
+        }
+
+        // Modal Utility Helpers
+        function openModal(modalType) {
+            if (modalType === 'quickAction') {
+                document.getElementById('quickActionModal').classList.remove('hidden');
+            } else {
+                triggerToast('Membuka rincian armada GPS...');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Form Submit Handler & Toast Display
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeModal('quickActionModal');
+            triggerToast('Permohonan berhasil dikirim ke Admin!');
+        }
+
+        function triggerToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
